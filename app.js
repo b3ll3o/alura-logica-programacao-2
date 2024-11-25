@@ -1,5 +1,8 @@
-let numeroAleatorio = gerarNumeroAleatorio();
+let listaDeNumerosSorteados = [];
 let tentativas = 1;
+let numeroLimiteTentativas = 3;
+
+let numeroAleatorio = gerarNumeroAleatorio();
 
 console.log(numeroAleatorio);
 
@@ -38,7 +41,17 @@ function reiniciarJogo(){
 }
 
 function gerarNumeroAleatorio(){
-    return parseInt(Math.random() * 10 + 1);
+    const numeroGerado = parseInt(Math.random() * 10 + 1);
+    const quantidadeElementosNaLista = listaDeNumerosSorteados.length;
+    if(quantidadeElementosNaLista === numeroLimiteTentativas){
+        listaDeNumerosSorteados = [];
+    }
+    if(listaDeNumerosSorteados.includes(numeroGerado)){
+        return gerarNumeroAleatorio();
+    }else {
+        listaDeNumerosSorteados.push(numeroGerado);
+        return numeroGerado;
+    }
 }
 
 function limparCampo(){
